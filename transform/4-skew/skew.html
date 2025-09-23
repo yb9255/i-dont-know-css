@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Transition</title>
+    <style type="text/css">
+      img {
+        width: 300px;
+        display: block;
+        margin: auto;
+        margin-top: 200px;
+        transition: transform 1s;
+      }
+
+      /** x축을 기준으로 각도에 맞춰 기울어지듯이 동작
+			 top-left와 bottom-right가 대각선 방향으로 늘어나는 느낌
+			*/
+      #a:hover {
+        transform: skewX(20deg);
+      }
+
+      /** y축을 기준으로 각도에 맞추 기울어지듯이 동작
+				top-left와 bottom-right가 각자 위/아래 직선 방향으로 늘어나는 느낌
+			*/
+      #b:hover {
+        transform: skewY(20deg);
+      }
+
+      /** x, y축 모두 기울어지듯이 동작. translate처럼 둘 다 입력해줘야 함 */
+      #c:hover {
+        transform: skew(20deg, 20deg);
+      }
+    </style>
+  </head>
+
+  <body>
+    <img id="a" src="cat.jpg" alt="" />
+    <img id="b" src="cat.jpg" alt="" />
+    <img id="c" src="cat.jpg" alt="" />
+  </body>
+</html>
