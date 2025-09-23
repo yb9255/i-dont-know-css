@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Transition</title>
+    <style type="text/css">
+      img {
+        width: 300px;
+        display: block;
+        margin: auto;
+        margin-top: 200px;
+        transition: transform 2s;
+      }
+
+      /* clockwise */
+      #first:hover {
+        transform: rotate(200deg);
+      }
+
+      /* counter-clockwise*/
+      #second:hover {
+        transform: rotate(-200deg);
+      }
+
+      /* rotate 360deg clockwise */
+      #third:hover {
+        transform: rotate(1turn);
+      }
+
+      /* rotate 180deg counter-clockwise */
+      #fourth:hover {
+        transform: rotate(-0.5turn);
+      }
+
+      /* grad:(gradient) -> max 400
+			  rotate 180deg clockwise
+			*/
+      #fifth:hover {
+        transform: rotate(200grad);
+      }
+    </style>
+  </head>
+
+  <body>
+    <img id="first" src="cat.jpg" alt="" />
+    <img id="second" src="cat.jpg" alt="" />
+    <img id="third" src="cat.jpg" alt="" />
+    <img id="fourth" src="cat.jpg" alt="" />
+    <img id="fifth" src="cat.jpg" alt="" />
+  </body>
+</html>
