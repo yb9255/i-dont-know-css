@@ -1,0 +1,48 @@
+/* 기본 CSS */
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+  color: #272727;
+  font-family: sans-serif;
+  font-size: 45px;
+  border: 5px solid #272727;
+  padding: 40px 80px;
+  position: relative;
+  /* 애니메이션 네모 박스를 숨기는 효과 */
+  overflow: hidden;
+}
+
+/* 애니메이션 */
+
+/* 호버 시 움직일 배경 이미지 역할을 할 before
+a 크기만큼의 노란색 네모 박스 before가 바깥 쪽에 세워져 있다가
+hover할 경우 a 방햐응로 90도로 기울어지는 효과를 주고
+a의 overflow를 hidden 처리하면, hover시 한쪽면에서 배경이 채워지는 효과가 나옴
+*/
+
+a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: yellow;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  /* origin을 바꿈으로서 애니메이션 효과를 자주 바꿀 수 있음. */
+  transform-origin: bottom left;
+  transform: rotate(-90deg);
+  transition: transform 1s;
+}
+
+/* 애니메이션 트리거 */
+a:hover::before {
+  transform: rotate(0deg);
+}
