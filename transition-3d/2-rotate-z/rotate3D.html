@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>translate in 3D</title>
+    <style type="text/css">
+      body {
+        perspective: 500px;
+      }
+
+      img {
+        width: 300px;
+        display: block;
+        margin: auto;
+        margin-top: 200px;
+        transition: transform 1s;
+      }
+
+      /* 이미지의 X축으로 축을 꽃고 시계 방향으로 돌리면 생길 이미지 생각
+			앞에서 뒤로 3D로 뒤집히는 효과가 발생
+
+			뒤집히는 이미지는 상하반전 발생
+			*/
+      #rotate-x:hover {
+        transform: rotateX(50deg);
+      }
+
+      /* 이미지의 Y축으로 축을 꽃고 축을 시계방향으로 돌리면 생길 이미지 생각
+				시계방향으로 3D로 뒤집히는 효과가 발생
+
+				뒤집힌 이미지는 좌우반전 발생
+			*/
+      #rotate-y:hover {
+        transform: rotateY(180deg);
+      }
+
+      /** 화면과 사용자 사이에 축을 꽃고 시계방향으로 돌리면
+			이미지가 움직일 방향 생각
+			*/
+      #rotate-z:hover {
+        transform: rotateZ(120deg);
+      }
+    </style>
+  </head>
+
+  <body>
+    <img src="cat.jpg" alt="" id="rotate-x" />
+    <img src="cat.jpg" alt="" id="rotate-y" />
+    <img src="cat.jpg" alt="" id="rotate-z" />
+  </body>
+</html>
