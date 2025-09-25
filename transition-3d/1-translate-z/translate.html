@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>translate in 3D</title>
+    <style type="text/css">
+      /* CSS Z축은 사용자와 컴퓨터 스크린 사이를 연결하는 축을 의미 */
+
+      body {
+        /** 컴퓨터 스크린과 사용자 사리의 거리
+					컴퓨터 스크린과 사용자의 거리가 500px만큼 떨어져 있다고 지정하는 것으로
+					perspective가 멀수록 사용자와 스크린간의 거리를 멀게 지정한 것이므로
+					translateZ 1px당 변화폭이 작아진다.
+
+					3D 애니메이션을 적용하려면 나와 요소간의 거리를 지정해주는 perspective가
+					반드시 부모 요소에 지정되어 있어야 한다.
+				*/
+        perspective: 1000px;
+      }
+
+      img {
+        width: 300px;
+        display: block;
+        margin: auto;
+        margin-top: 200px;
+        transition: transform 1s;
+      }
+
+      #first:hover {
+        /* 500px만큼 사용자에게 가깝게 다가오도록 이미지 위치가 변경
+					위치가 가까워진 것이기 때문에 width/height의 변경값은 없음.
+					만약 perspective보다 translateZ의 px값이 커지면,
+					요소는 사용자를 지나쳐버리기 때문에 계속 커지다가 화면에서 사라져버리는 효과가 남.
+				*/
+        transform: translateZ(500px);
+      }
+
+      #second:hover {
+        /* -300px만큼 사용자에게 멀어지도록 이미지 위치가 변경
+					위치가 멀어진 것이기 때문에 width/height의 변경값은 없음.
+				*/
+        transform: translateZ(-300px);
+      }
+    </style>
+  </head>
+
+  <body>
+    <img src="cat.jpg" alt="" id="first" />
+    <img src="cat.jpg" alt="" id="second" />
+  </body>
+</html>
