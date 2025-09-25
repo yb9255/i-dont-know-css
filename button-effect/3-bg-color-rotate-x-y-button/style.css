@@ -1,0 +1,67 @@
+/* 기본 CSS */
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+  color: #262626;
+  font-family: sans-serif;
+  font-size: 45px;
+  border: 5px solid #262626;
+  letter-spacing: 2px;
+  padding: 40px 80px;
+  position: relative;
+  transition: 1s;
+}
+
+/** 애니메이션 */
+
+/* rotate 90도 -> 0도로 바꾸면 요소가 사용자 시각에
+완전 90도 각도로 있어서 안보이던게 보이는 형태로 보임.
+
+이게 마치 중간에서 요소가 생겨나는듯한 느낌을 줌. 이를 활용해서 배경색이
+중간에서부터 생겨나서 상하좌우로 펴지는 효과를 만들 수 있음.
+*/
+
+a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background-color: #262626;
+  transition: 1s;
+  transform: rotateX(90deg);
+}
+
+a::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background-color: #262626;
+  transition: 1s;
+  transform: rotateY(90deg);
+}
+
+a:hover::before {
+  transform: rotateX(0);
+}
+
+a:hover::after {
+  transform: rotateY(0);
+}
+
+a:hover {
+  color: white;
+}
