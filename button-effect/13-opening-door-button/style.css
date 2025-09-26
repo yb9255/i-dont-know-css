@@ -1,0 +1,87 @@
+/* 기본 CSS */
+
+body {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: verdana;
+}
+
+a {
+  width: 300px;
+  height: 60px;
+  text-decoration: none;
+  text-transform: uppercase;
+  background-color: transparent;
+  text-align: center;
+  line-height: 60px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  position: relative;
+  transition: all 0.2s;
+  color: white;
+}
+
+/* 애니메이션 */
+
+/*
+1. 배경 두개를 before, after로 absolute positioning으로 배치한다. 그 다음 요소간의 색 배합을 어떻게 할지 정하는
+mix-blend-mode를 multiply로 지정해서 파란색과 빨간색이 섞이도록 우선 설정한다.
+
+mix-blend-mode https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode#formal_syntax
+multiply는 위/아래 겹치는 색의 곱으로 표시되며, 검은색이 짙을 수록 더 강하게 나타나고 흰색은 아무 영향을 주지 못한다.
+이를 통해 투명한 두 개의 색을 오버래핑한 효과를 준다.
+
+2. hover 시 before은 top x축을 기점으로 위쪽으로 회전하도록 rotateX를 지정한다. 이 때,
+perspective 함수를 같이 써서 before에만 perspective를 주도록 해서 먼 거리에서 rotateX로 회전해서 열리는 느낌을 준다.
+3. hover 시 before의 top x축을 살짝 위로 올려서 위치를 조정해 자연스럽게 열리는 효과를 준다.
+4. hover 시 after는 bottom x축을 기점으로 아래쪽으로 회전하도록 rotateX를 지정한다. 이 때,
+perspective 함수를 같이 써서 after에만 perspective를 주도록 해서 먼 거리에서 rotateX로 회전해서 열리는 느낌을 준다.
+3. hover 시 after의 top x축을 살짝 아래로 내려서 위치를 조정해 자연스럽게 열리는 효과를 준다.
+*/
+
+a::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background-color: #20caff;
+  mix-blend-mode: multiply;
+  transition: all 0.2s;
+  transform-origin: top;
+}
+
+a::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background-color: #ff7675;
+  mix-blend-mode: multiply;
+  transition: all 0.2s;
+  transform-origin: bottom;
+}
+
+a:hover {
+  color: #272727;
+}
+
+a:hover::before {
+  top: -6px;
+  left: 0;
+  transform: perspective(1000px) rotateX(75deg);
+}
+
+a:hover::after {
+  top: 6px;
+  left: 0;
+  transform: perspective(1000px) rotateX(-75deg);
+}
