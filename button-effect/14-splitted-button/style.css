@@ -1,0 +1,85 @@
+/* 기본 CSS */
+
+body {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #222;
+}
+
+a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 25px;
+  font-family: verdana;
+  color: #f6b93b;
+  letter-spacing: 3px;
+  padding: 25px 50px;
+  position: relative;
+  border: 3px solid #f6b93b;
+  transition: all 0.2s;
+  overflow: hidden;
+}
+
+/* 애니메이션 */
+
+/* 사용할 Pseudo Element가 부족하므로, span을 추가하여 4개의 가상 요소를 absolute positioning으로 각각 위치에 배치 */
+
+a::before,
+a::after,
+span::before,
+span::after {
+  content: '';
+  position: absolute;
+  width: 25%;
+  height: 100%;
+  background-color: #f6b93b;
+  z-index: -1;
+  transition: all 0.5s;
+}
+
+a::before {
+  top: 0;
+  left: -25%;
+}
+
+a::after {
+  top: -100%;
+  left: 25%;
+}
+
+span::before {
+  top: 100%;
+  right: 25%;
+}
+
+span::after {
+  top: 0;
+  right: -25%;
+}
+
+a:hover {
+  color: #222;
+}
+
+a:hover::before {
+  top: 0;
+  left: 0;
+}
+
+a:hover::after {
+  top: 0;
+  left: 25%;
+}
+
+a:hover span::before {
+  top: 0;
+  right: 25%;
+}
+
+a:hover span::after {
+  top: 0;
+  right: 0;
+}
