@@ -1,0 +1,70 @@
+/* 기본 CSS */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+  width: 160px;
+  height: 60px;
+  color: black;
+  line-height: 60px;
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 25px;
+  position: relative;
+  transition: all 0.2s;
+  overflow: hidden;
+}
+
+span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: 2px solid black;
+  z-index: -1;
+}
+
+/* 애니메이션 */
+
+/*
+1. 그냥 border를 자르는 것은 어려우므로 span으로 border를 표현한다.
+2. span에 가상 요소를 만들어 대각선 모양으로 span을 덮음으로서 잘린 모양을 표시한다.
+3. hover시 span의 가상 요소를 span과 같은 색깔이고 같은 width의 반대편 방향 대각선 네모가 되도록 움직임으로써
+배경색이 border와 같게 변하면서 대각선이 바뀌는 듯한 시각 효과를 주는 애니메이션을 구현하다.
+*/
+
+span::before {
+  content: '';
+  position: absolute;
+  width: 8%;
+  height: 500%;
+  background: white;
+  top: 50%;
+  left: 50%;
+  transition: all 0.2s;
+  transform: translate(-50%, -50%) rotate(-60deg);
+}
+
+a:hover span::before {
+  width: 100%;
+  background-color: black;
+  transform: translate(-50%, -50%) rotate(60deg);
+}
+
+a:hover {
+  color: white;
+}
