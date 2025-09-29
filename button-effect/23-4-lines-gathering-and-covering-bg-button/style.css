@@ -1,0 +1,135 @@
+/*
+1. anchor 태그로 들어오는 4개의 막대기 역할을 하는 span을 자식으로 배치함
+2. span을 absolute positioning으로 배치함
+2-1. transform origin을 각 막대 방향으로 해서 막대가 다가오는 방향부터 줄어들게 보이도록 설정
+2-2. span의 기본 transition-delay를 0.25초를 주되 hover시 해당 delay를 없애서, hover시에는 애니메이션이 즉시 보이지만
+hover를 끝내면 애니메이션이 0.25초 뒤에 발동하도록 함. 후술할 배경요소가 되돌아가고 나서 막대기가 다시 보이도록 하는 구현.
+2-3. blur가 낮은 그림자부터 blur가 높은 그림자 여러개를 중첩해서 glowing하는 효과를 구현
+3. 4개의 막대가 모여서 사라진 뒤 투명상태에서 색을 가지도록 변해 배경색 역할을 하는 before을 만듦
+3-1. before는 hover가 끝나자마자 다시 투명 상태로 돌아가야 하므로, 기본 transition-delay는 0
+3-2. hover시에는 4개의 막대가 모여서 사라진 뒤에 색이 변해야 하므로 transition-delay를 0.5s를 가진다.
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background: #222;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 150px;
+}
+
+a {
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 20px 35px;
+  border: 2px solid #1e9bff;
+  color: #1e9bff;
+  font-size: 20px;
+  letter-spacing: 4px;
+  transition: all 0.5s;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background-color: #1e9bff;
+    transform: scale(0);
+    transition: all 0.5s;
+  }
+}
+
+span {
+  position: absolute;
+  background: #1e9bff;
+  box-shadow: 0 0 10px #1e9bff, 0 0 20px #1e9bff, 0 0 30px #1e9bff,
+    0 0 50px #1e9bff, 0 0 100px #1e9bff;
+
+  transition: 0.5s ease-in-out;
+  transition-delay: 0.25s;
+
+  &:nth-child(1) {
+    top: calc(50% - 2px);
+    left: -50px;
+    transform-origin: left;
+  }
+
+  &:nth-child(2) {
+    bottom: -50px;
+    left: calc(50% - 2px);
+    transform-origin: bottom;
+  }
+
+  &:nth-child(3) {
+    top: calc(50% - 2px);
+    right: -50px;
+    transform-origin: right;
+  }
+
+  &:nth-child(4) {
+    top: -50px;
+    left: calc(50% - 2px);
+    transform-origin: top;
+  }
+
+  &:nth-child(1),
+  &:nth-child(3) {
+    width: 40px;
+    height: 4px;
+  }
+
+  &:nth-child(2),
+  &:nth-child(4) {
+    width: 4px;
+    height: 40px;
+  }
+}
+
+a:hover {
+  color: white;
+  border: 2px solid transparent;
+
+  &::before {
+    transform: scale(1);
+    transition-delay: 0.5s;
+    box-shadow: 0 0 10px #1e9bff, 0 0 30px #1e9bff, 0 0 60px #1e9bff;
+  }
+
+  span {
+    transform: scaleX(0);
+    transition-delay: 0s;
+  }
+
+  span:nth-child(1) {
+    left: 50%;
+  }
+
+  span:nth-child(2) {
+    bottom: 50%;
+  }
+
+  span:nth-child(3) {
+    right: 50%;
+  }
+
+  span:nth-child(4) {
+    top: 50%;
+  }
+}
