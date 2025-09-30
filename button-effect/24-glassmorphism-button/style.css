@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap');
+
+/*
+1. .btn div를 만들어 a의 컨테이너이자 a 후면을 장식할 가상 요소의 오리지널 요소로서의 역할을 하도록 함
+2. a 태그의 가상 요소에 linear-gradient를 적용해서 반투명 유리 재질 효과를 줌. skew를 사용해서 유리
+재질 부분을 살짝 기울인 다음, translate로 hover시 반짝이는 듯한 느낌을 주며 가상 요소가 사라지도록 함
+3. 이 후 살짝 딜레이를 준 다음 .btn의 가상요소로 만든 a 후면에 있는 분홍색 영역이 커지면서 후방 blur 역할을
+하도록 함
+3-1. a 태그에 backdrop-filter로 blur처리를 해서 btn의 가상요소를 블러처리를 함
+3-2. 기본 transition-delay를 반짝이는 효과 -> 분홍색 영역 확대가 되도록 조정하되, hover 시에는 transition-delay를
+역으로 줘서 분홍색 영역 축소 -> 역으로 반짝이는 효과가 되도록 수정
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #0c2461;
+}
+
+.container {
+  width: 600px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.btn {
+  position: relative;
+  width: 155px;
+  height: 50px;
+  margin: 20px;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    z-index: -1;
+    transform: translateX(-50%);
+    background: #ff0461;
+    box-shadow: 0 0 5px #ff1f72, 0 0 15px #ff1f72, 0 0 30px #ff1f72,
+      0 0 60px #ff1f72;
+    width: 30px;
+    height: 10px;
+    border-radius: 10px;
+    transition: 0.5s;
+    transition-delay: 0s;
+  }
+
+  &::before {
+    bottom: -5px;
+  }
+
+  &::after {
+    top: -5px;
+  }
+
+  & a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.051);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(250, 52, 52, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 30px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: 0.5s;
+    overflow: hidden;
+    backdrop-filter: blur(15px);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.149)
+      );
+      transform: skewX(45deg);
+      transition: 0.5s;
+      transition-delay: 0.5s;
+    }
+  }
+
+  &:hover {
+    &::before {
+      bottom: 0;
+      height: 50%;
+      width: 80%;
+      border-radius: 30px;
+      transition-delay: 0.5s;
+    }
+
+    &::after {
+      top: 0;
+      height: 50%;
+      width: 80%;
+      border-radius: 30px;
+      transition-delay: 0.5s;
+    }
+
+    a {
+      letter-spacing: 3px;
+      &::before {
+        transform: skewX(45deg) translateX(200%);
+        transition-delay: 0s;
+      }
+    }
+  }
+}
