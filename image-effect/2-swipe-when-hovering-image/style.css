@@ -1,0 +1,59 @@
+/*
+  1. 호버 시 absolute positioning로 외부로 벗어난 caption을 내부로 재위치시킴
+  2. 호버 시 이미지를 1.3배로 확대하고 -15도 기울임
+  3. 컨테이너의 overflow를 hidden처리해서 이미지가 확대된 영역이 잘리도록 표시
+*/
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Lato', sans-serif;
+}
+
+.container {
+  width: 500px;
+  height: 500px;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    .caption {
+      transform: translateX(0);
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    img {
+      transform: scale(1.3) rotate(-15deg);
+    }
+  }
+}
+
+img {
+  width: 100%;
+  transition: all 0.5s;
+}
+
+.caption {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  align-content: center;
+  text-align: center;
+  color: white;
+  transition: all 0.5s;
+  transform: translateX(-100%);
+
+  h1 {
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  p {
+    font-size: 18px;
+    text-transform: capitalize;
+  }
+}
