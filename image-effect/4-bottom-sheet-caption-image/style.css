@@ -1,0 +1,50 @@
+/*
+1. container의 overflow를 hidden으로 두고
+2. caption을 translate로 container 바깥에 위치
+3. hover시 caption의 translate를 해제하여 container 내부로 이동
+4. hover시 caption 높이만큼 img를 위쪽으로 translate함.
+*/
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Lato', sans-serif;
+}
+
+.container {
+  width: 500px;
+  height: 500px;
+  position: relative;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    transition: all 0.5s;
+  }
+
+  .caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    transition: all 0.5s;
+    background-color: black;
+    transform: translateY(100%);
+  }
+
+  &:hover {
+    .caption {
+      transform: translateY(0%);
+    }
+
+    img {
+      transform: translateY(-30%);
+    }
+  }
+}
