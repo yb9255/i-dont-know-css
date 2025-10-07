@@ -1,0 +1,108 @@
+/*
+1. 배경 블러를 가상 요소로 만듦. 컨테이너보다 큰 크기로 우측 하단에 배치
+2. h2, p, a 요소를 각각 버튼의 귀퉁이로 보내놓은 다음 컨테이너 overflow를 히든 처리
+3. hover시 컨테이너 내부로 들어오되 transition-delay를 hover시 주어 순차적으로 들어오도록 처리
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Lato', sans-serif;
+  background-color: #272727;
+}
+
+.container {
+  width: 450px;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120%;
+    height: 205%;
+    background-color: #2d3436;
+    opacity: 0.8;
+    transition: all 0.25s;
+    transform: translate(550px, 300px) rotate(45deg);
+  }
+
+  .caption {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    color: white;
+    text-transform: uppercase;
+
+    h2 {
+      text-align: center;
+      font-size: 17px;
+      padding: 20px;
+      margin-top: 20px;
+      background-color: rgba(0, 0, 0, 0.8);
+      transform: translate(200px, -200px);
+      transition: all 0.25s;
+    }
+
+    p {
+      font-size: 16px;
+      width: 80%;
+      text-align: center;
+      align-self: center;
+      transition: all 0.25s;
+      transform: translate(-200px, 200px);
+    }
+
+    a {
+      text-decoration: none;
+      align-self: center;
+      background-color: black;
+      color: white;
+      width: 100px;
+      padding: 15px;
+      margin-bottom: 20px;
+      transition: all 0.25s;
+      transform: translateY(100px);
+    }
+  }
+
+  &:hover {
+    &::before {
+      transform: translate(-50px, -150px) rotate(45deg);
+    }
+
+    h2 {
+      transform: translate(0, 0);
+      transition-delay: 0.3s;
+    }
+
+    p {
+      transform: translate(0, 0);
+      transition-delay: 0.4s;
+    }
+
+    a {
+      transform: translateY(0);
+      transition-delay: 0.5s;
+    }
+  }
+}
